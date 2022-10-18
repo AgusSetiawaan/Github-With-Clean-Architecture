@@ -1,0 +1,13 @@
+package com.astro.test.core.data.source.local.entity
+
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "github_user")
+data class GithubUserEntity(
+    @PrimaryKey
+    val id: Int,
+    val username: String,
+    val name: String,
+    var isFavorite: Boolean
+)
