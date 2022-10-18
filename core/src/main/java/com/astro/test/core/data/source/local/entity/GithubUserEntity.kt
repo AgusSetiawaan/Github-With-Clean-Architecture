@@ -8,6 +8,6 @@ data class GithubUserEntity(
     @PrimaryKey
     val id: Int,
     val username: String,
-    val name: String,
+    val avatarUrl: String,
     var isFavorite: Boolean
 )

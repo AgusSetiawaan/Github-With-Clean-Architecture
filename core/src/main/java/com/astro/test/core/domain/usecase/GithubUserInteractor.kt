@@ -1,6 +1,6 @@
 package com.astro.test.core.domain.usecase
 
-import com.astro.test.core.data.Resource
+import androidx.paging.PagingData
 import com.astro.test.core.domain.model.GithubUser
 import com.astro.test.core.domain.repository.IGithubUserRepository
 import kotlinx.coroutines.flow.Flow
@@ -11,11 +11,11 @@ class GithubUserInteractor @Inject constructor(private val repository: IGithubUs
         query: String,
         sort: String,
         order: String
-    ): Flow<Resource<List<GithubUser>>> {
+    ): Flow<PagingData<GithubUser>> {
         return repository.searchUsers(query, sort, order)
     }
 
-    override fun getFavoriteUsers(): Flow<Resource<List<GithubUser>>> {
+    override fun getFavoriteUsers(): Flow<List<GithubUser>> {
         return repository.getFavoriteUsers()
     }
 

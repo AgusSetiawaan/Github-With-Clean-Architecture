@@ -1,6 +1,7 @@
 package com.astro.test.core.utils
 
 import com.astro.test.core.data.source.local.entity.GithubUserEntity
+import com.astro.test.core.data.source.remote.response.GithubUserResponse
 import com.astro.test.core.domain.model.GithubUser
 
 object DataMapper {
@@ -10,7 +11,7 @@ object DataMapper {
             GithubUser(
                 id = it.id,
                 username = it.username,
-                name = it.name,
+                avatarUrl = it.avatarUrl,
                 isFavorite = it.isFavorite
             )
         }
@@ -19,7 +20,15 @@ object DataMapper {
         GithubUserEntity(
             id = user.id,
             username = user.username,
-            name = user.name,
+            avatarUrl = user.avatarUrl,
             isFavorite = true
+        )
+
+    fun mapResponseToDomain(response: GithubUserResponse): GithubUser =
+        GithubUser(
+            id = response.id,
+            username = response.login,
+            avatarUrl = response.avatarUrl,
+            isFavorite = false
         )
 }
