@@ -17,7 +17,19 @@ dependencies {
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 
+    //Navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
+
     implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycle_version"
 
     implementation "androidx.paging:paging-runtime-ktx:$paging_version"
+
+    implementation "de.hdodenhof:circleimageview:$circle_image_version"
+
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
+
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version" //lifecycleScope
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version" //asLiveData
 }

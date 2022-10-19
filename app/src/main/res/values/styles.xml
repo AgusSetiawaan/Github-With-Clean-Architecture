@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="fontTitle">
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/roboto</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/title_color</item>
+    </style>
+
+    <style name="fontSubTitle">
+        <item name="android:textSize">16sp</item>
+        <item name="fontFamily">@font/roboto</item>
+        <item name="android:textColor">@color/title_color</item>
+    </style>
+
+    <style name="fontRegularBlack">
+        <item name="android:textSize">12sp</item>
+        <item name="fontFamily">@font/roboto</item>
+        <item name="android:textColor">@color/title_color</item>
+    </style>
+
+    <style name="fontRegular">
+        <item name="android:textSize">12sp</item>
+        <item name="fontFamily">@font/roboto</item>
+        <item name="android:textColor">@color/regular_text_color</item>
+    </style>
+
+</resources>
