@@ -3,37 +3,66 @@ package com.astro.test.agussetiawan.adapter
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.astro.test.agussetiawan.R
+import com.astro.test.agussetiawan.core.domain.model.DataItem
 import com.astro.test.agussetiawan.core.domain.model.GithubUser
+import com.astro.test.agussetiawan.core.domain.model.SortType
+import com.astro.test.agussetiawan.databinding.ItemRadioButtonSortBinding
 import com.astro.test.agussetiawan.databinding.ItemUserBinding
 import com.bumptech.glide.Glide
 
-class HomeScreenAdapter(private val onFavoriteClick: (GithubUser) -> Unit): PagingDataAdapter<GithubUser, HomeScreenAdapter.GithubUserItemViewHolder>(DIFF_CALLBACK) {
+class HomeScreenAdapter(private val onFavoriteClick: (GithubUser) -> Unit,
+                        private val onRadioButtonClick: (SortType) -> Unit): PagingDataAdapter<DataItem, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GithubUserItemViewHolder {
-        val binding =
-            ItemUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return GithubUserItemViewHolder(binding, parent.context, onFavoriteClick)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return when(viewType){
+            HEADER_ITEM_VIEW_TYPE -> {
+                val binding = ItemRadioButtonSortBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                SortViewHolder(binding, onRadioButtonClick)
+            }
+            else -> {
+                val binding =
+                    ItemUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                GithubUserItemViewHolder(binding, parent.context, onFavoriteClick)
+            }
+        }
+
 
     }
 
-    override fun onBindViewHolder(holder: GithubUserItemViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         getItem(position)?.let {
-            holder.bind(it)
+            if(it is DataItem.Header){
+                (holder as SortViewHolder).bind((it as DataItem.Header).sortType)
+            }
+            else{
+                (holder as GithubUserItemViewHolder).bind((it as DataItem.UserItem).user)
+            }
+        }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return when(getItem(position)){
+            is DataItem.Header -> HEADER_ITEM_VIEW_TYPE
+            else -> DATA_ITEM_VIEW_TYPE
         }
     }
 
     fun changeFavState(user: GithubUser) {
         val data = snapshot().items.find { it.id == user.id }
         val position = snapshot().items.indexOf(data)
-        if (data != null) {
-            data.isFavorite = user.isFavorite
+        data?.let {
+            if(data is DataItem.UserItem){
+                data.user.isFavorite = user.isFavorite
+            }
         }
         notifyItemChanged(position)
     }
@@ -64,17 +93,45 @@ class HomeScreenAdapter(private val onFavoriteClick: (GithubUser) -> Unit): Pagi
         }
     }
 
+    inner class SortViewHolder(private val binding: ItemRadioButtonSortBinding,
+                               private val onRadioButtonClick: (SortType) -> Unit): RecyclerView.ViewHolder(binding.root){
+        fun bind(sortType: SortType){
+            if(sortType == SortType.ASC){
+                binding.radioAsc.isChecked = true
+            }
+            else{
+                binding.radioDesc.isChecked = true
+            }
+
+            // onClick
+            binding.radioAsc.setOnClickListener{
+                if(it is RadioButton){
+                    if(it.isChecked){
+                        onRadioButtonClick(SortType.ASC)
+                    }
+                }
+            }
+            binding.radioDesc.setOnClickListener{
+                if(it is RadioButton){
+                    if(it.isChecked){
+                        onRadioButtonClick(SortType.DESC)
+                    }
+                }
+            }
+        }
+    }
+
     companion object {
 
-        private const val ITEM_VIEW_HEADER = 0
-        private const val ITEM_VIEW_DATA = 1
+        private const val HEADER_ITEM_VIEW_TYPE = 0
+        private const val DATA_ITEM_VIEW_TYPE = 1
 
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<GithubUser>() {
-            override fun areItemsTheSame(oldItem: GithubUser, newItem: GithubUser): Boolean {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<DataItem>() {
+            override fun areItemsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
                 return oldItem == newItem
             }
 
-            override fun areContentsTheSame(oldItem: GithubUser, newItem: GithubUser): Boolean {
+            override fun areContentsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
                 return oldItem.id == newItem.id
             }
         }

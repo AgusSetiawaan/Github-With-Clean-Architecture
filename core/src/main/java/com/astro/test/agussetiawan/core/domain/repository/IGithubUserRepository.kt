@@ -2,6 +2,7 @@ package com.astro.test.agussetiawan.core.domain.repository
 
 import androidx.paging.PagingData
 import com.astro.test.agussetiawan.core.domain.model.GithubUser
+import com.astro.test.agussetiawan.core.domain.model.SortType
 import kotlinx.coroutines.flow.Flow
 
 interface IGithubUserRepository {
@@ -13,4 +14,8 @@ interface IGithubUserRepository {
     suspend fun setFavoriteUser(user: GithubUser)
 
     suspend fun deleteFavorite(userId: Int)
+
+    fun getSortType(): Flow<SortType>
+
+    suspend fun saveSortType(sortType: SortType)
 }

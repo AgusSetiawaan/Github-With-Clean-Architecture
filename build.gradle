@@ -36,6 +36,8 @@ buildscript {
         coroutine_version = '1.6.4'
 
         chucker_interceptor = '3.5.2'
+
+        datastore_version = '1.0.0'
     }
 
     dependencies {
