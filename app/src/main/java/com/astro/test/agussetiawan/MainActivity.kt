@@ -1,7 +1,7 @@
 package com.astro.test.agussetiawan
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.astro.test.agussetiawan.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 

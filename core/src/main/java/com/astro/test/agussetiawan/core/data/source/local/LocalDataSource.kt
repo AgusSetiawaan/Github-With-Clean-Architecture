@@ -1,6 +1,5 @@
 package com.astro.test.agussetiawan.core.data.source.local
 
-import android.util.Log
 import com.astro.test.agussetiawan.core.data.source.local.datapreference.SortDataPreference
 import com.astro.test.agussetiawan.core.data.source.local.entity.GithubUserEntity
 import com.astro.test.agussetiawan.core.data.source.local.room.GithubUserDao

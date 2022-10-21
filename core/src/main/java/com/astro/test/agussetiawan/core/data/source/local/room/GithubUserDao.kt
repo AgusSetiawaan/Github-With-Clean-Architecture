@@ -1,6 +1,9 @@
 package com.astro.test.agussetiawan.core.data.source.local.room
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import com.astro.test.agussetiawan.core.data.source.local.entity.GithubUserEntity
 import kotlinx.coroutines.flow.Flow
 

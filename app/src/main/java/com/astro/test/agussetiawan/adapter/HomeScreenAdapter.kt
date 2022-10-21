@@ -1,13 +1,10 @@
 package com.astro.test.agussetiawan.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -41,7 +38,7 @@ class HomeScreenAdapter(private val onFavoriteClick: (GithubUser) -> Unit,
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         getItem(position)?.let {
             if(it is DataItem.Header){
-                (holder as SortViewHolder).bind((it as DataItem.Header).sortType)
+                (holder as SortViewHolder).bind(it.sortType)
             }
             else{
                 (holder as GithubUserItemViewHolder).bind((it as DataItem.UserItem).user)

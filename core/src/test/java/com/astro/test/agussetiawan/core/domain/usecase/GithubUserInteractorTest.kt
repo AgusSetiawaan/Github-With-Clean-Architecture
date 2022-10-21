@@ -1,14 +1,13 @@
 package com.astro.test.agussetiawan.core.domain.usecase
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.asLiveData
-import androidx.paging.*
+import androidx.paging.AsyncPagingDataDiffer
+import androidx.paging.PagingData
+import androidx.paging.PagingSource
+import androidx.paging.PagingState
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListUpdateCallback
 import com.astro.test.agussetiawan.core.DataDummy
-import com.astro.test.agussetiawan.core.data.GithubUserRepository
 import com.astro.test.agussetiawan.core.domain.model.DataItem
 import com.astro.test.agussetiawan.core.domain.model.GithubUser
 import com.astro.test.agussetiawan.core.domain.model.SortType
@@ -19,7 +18,6 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert
 import org.junit.Before

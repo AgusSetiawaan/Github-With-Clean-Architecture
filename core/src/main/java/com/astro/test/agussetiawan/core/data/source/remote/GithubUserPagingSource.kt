@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.astro.test.agussetiawan.core.data.source.local.entity.GithubUserEntity
-import com.astro.test.agussetiawan.core.data.source.remote.network.ApiService
 import com.astro.test.agussetiawan.core.domain.model.GithubUser
 import com.astro.test.agussetiawan.core.utils.DataMapper
 import com.astro.test.agussetiawan.core.utils.parseErrorBody

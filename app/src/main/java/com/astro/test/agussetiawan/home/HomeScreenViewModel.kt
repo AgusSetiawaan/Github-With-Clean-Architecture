@@ -1,6 +1,5 @@
 package com.astro.test.agussetiawan.home
 
-import android.util.Log
 import androidx.lifecycle.*
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
@@ -9,7 +8,6 @@ import com.astro.test.agussetiawan.core.domain.model.GithubUser
 import com.astro.test.agussetiawan.core.domain.model.SortType
 import com.astro.test.agussetiawan.core.domain.usecase.GithubUserUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
