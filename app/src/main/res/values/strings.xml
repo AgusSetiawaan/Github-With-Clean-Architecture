@@ -7,4 +7,5 @@
     <string name="sort_asc">ASC</string>
     <string name="sort_desc">DESC</string>
     <string name="retry">Retry</string>
+    <string name="by_followers">By Followers</string>
 </resources>

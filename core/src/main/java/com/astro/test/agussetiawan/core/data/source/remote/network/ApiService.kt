@@ -1,6 +1,7 @@
 package com.astro.test.agussetiawan.core.data.source.remote.network
 
 import com.astro.test.agussetiawan.core.data.source.remote.response.GithubSearchUserResponse
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -13,6 +14,6 @@ interface ApiService {
         @Query("page") page: Int,
         @Query("sort") sort: String? = null,
         @Query("order") order: String? = null
-    ): GithubSearchUserResponse
+    ): Response<GithubSearchUserResponse>
 
 }

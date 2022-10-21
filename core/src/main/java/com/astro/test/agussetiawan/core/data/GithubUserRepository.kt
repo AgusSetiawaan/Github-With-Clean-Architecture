@@ -1,11 +1,11 @@
 package com.astro.test.agussetiawan.core.data
 
 import android.util.Log
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.PagingData
+import androidx.paging.*
 import com.astro.test.agussetiawan.core.data.source.local.LocalDataSource
+import com.astro.test.agussetiawan.core.data.source.local.entity.GithubUserEntity
 import com.astro.test.agussetiawan.core.data.source.remote.GithubUserPagingSource
+import com.astro.test.agussetiawan.core.data.source.remote.RemoteDataSource
 import com.astro.test.agussetiawan.core.data.source.remote.network.ApiService
 import com.astro.test.agussetiawan.core.domain.model.GithubUser
 import com.astro.test.agussetiawan.core.domain.model.SortType
@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class GithubUserRepository @Inject constructor(
-    private val apiService: ApiService,
+    private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource
 ) : IGithubUserRepository {
     override fun searchUsers(
@@ -25,7 +25,6 @@ class GithubUserRepository @Inject constructor(
         sort: String?,
         order: String?
     ): Flow<PagingData<GithubUser>> {
-        //TODO: check favorite users in database before get list
         return Pager(
             config = PagingConfig(
                 pageSize = 20,
@@ -33,7 +32,7 @@ class GithubUserRepository @Inject constructor(
             ),
             pagingSourceFactory = {
                 GithubUserPagingSource(
-                    apiService,
+                    remoteDataSource,
                     query,
                     sort,
                     order,

@@ -68,10 +68,6 @@ class HomeScreenView: Fragment() {
         viewModel.searchResult.observe(viewLifecycleOwner){
             setListData(it)
         }
-
-        viewModel.getSortType().observe(viewLifecycleOwner){
-            Log.d("Homre Screen","masuk sini")
-        }
     }
 
     private fun setListData(listData: PagingData<DataItem>){
@@ -87,7 +83,7 @@ class HomeScreenView: Fragment() {
 
         lifecycleScope.launch{
             adapter.loadStateFlow.collect{ loadState ->
-                val isListEmpty = loadState.refresh is LoadState.NotLoading && adapter.itemCount == 0
+                val isListEmpty = loadState.refresh is LoadState.NotLoading && adapter.itemCount - 1 == 0
                 // show empty list
                 binding.tvNoResult.isVisible = isListEmpty
                 // Only show the list if refresh succeeds.
@@ -95,21 +91,24 @@ class HomeScreenView: Fragment() {
                 // Show loading spinner during initial load or refresh.
                 binding.progressBar.isVisible = loadState.source.refresh is LoadState.Loading
                 // Show the retry state if initial load or refresh fails.
-                binding.retryButton.isVisible = loadState.source.refresh is LoadState.Error
+                binding.errorLayout.isVisible = loadState.source.refresh is LoadState.Error
 
                 val errorState = loadState.source.append as? LoadState.Error
                     ?: loadState.source.prepend as? LoadState.Error
                     ?: loadState.append as? LoadState.Error
                     ?: loadState.prepend as? LoadState.Error
                 errorState?.let {
-                    Toast.makeText(
-                        requireContext(),
-                        it.error.toString(),
-                        Toast.LENGTH_LONG
-                    ).show()
+                    binding.errorMsg.text = it.error.localizedMessage
+                }
+
+                if(loadState.source.refresh is LoadState.Error){
+                    binding.errorMsg.text = (loadState.refresh as LoadState.Error).error.localizedMessage
                 }
             }
         }
+
+        //onClick Listener retry button
+        binding.retryButton.setOnClickListener { adapter.retry() }
     }
 
     private fun onFavoriteClick(user: GithubUser){

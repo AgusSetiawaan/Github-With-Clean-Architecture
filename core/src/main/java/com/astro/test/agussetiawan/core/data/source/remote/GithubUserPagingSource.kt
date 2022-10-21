@@ -1,20 +1,22 @@
 package com.astro.test.agussetiawan.core.data.source.remote
 
+import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.astro.test.agussetiawan.core.data.source.local.entity.GithubUserEntity
 import com.astro.test.agussetiawan.core.data.source.remote.network.ApiService
 import com.astro.test.agussetiawan.core.domain.model.GithubUser
 import com.astro.test.agussetiawan.core.utils.DataMapper
+import com.astro.test.agussetiawan.core.utils.parseErrorBody
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 
 class GithubUserPagingSource(
-    private val apiService: ApiService,
+    private val remoteDataSource: RemoteDataSource,
     private val query: String,
     private val sort: String?,
     private val order: String?,
-    private val favoriteUser: Flow<List<GithubUserEntity>>
+    private val favoriteUsers: Flow<List<GithubUserEntity>>
 ): PagingSource<Int, GithubUser>() {
 
     private companion object{
@@ -29,19 +31,30 @@ class GithubUserPagingSource(
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, GithubUser> {
-        return try {
+        try {
             val position = params.key ?: INITIAL_PAGE_INDEX
-            val responseData = apiService.searchUsers(query, params.loadSize, position, sort, order)
+            val responseData = remoteDataSource.getSearchUsers(query, params.loadSize, position, sort, order)
 
-            val dataList = responseData.items.map {
-                DataMapper.mapResponseToDomain(it, favoriteUser.first())
+            if(responseData.isSuccessful){
+                val responseBody = responseData.body()
+                val dataList = responseBody?.items?.map {
+                    DataMapper.mapResponseToDomain(it, favoriteUsers.first())
+                }
+
+                return LoadResult.Page(
+                    data = dataList?: listOf(),
+                    prevKey = if (position == INITIAL_PAGE_INDEX) null else position - 1,
+                    nextKey = if (dataList.isNullOrEmpty()) null else position + 1
+                )
+            }
+            else{
+                val errorResponse = parseErrorBody(responseData.errorBody())
+                val throwable = Throwable(message = errorResponse.message)
+                Log.d("pagingsource", throwable.message?:"kosong")
+                return LoadResult.Error(throwable)
             }
 
-            LoadResult.Page(
-                data = dataList,
-                prevKey = if (position == INITIAL_PAGE_INDEX) null else position - 1,
-                nextKey = if (dataList.isEmpty()) null else position + 1
-            )
+
         }
 
         catch (e: Exception){

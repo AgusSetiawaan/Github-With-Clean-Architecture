@@ -35,4 +35,11 @@ dependencies {
 
     //datastore
     implementation "androidx.datastore:datastore-preferences:$datastore_version"
+
+    //mockito
+    testImplementation "androidx.arch.core:core-testing:$core_testing_version" // InstantTaskExecutorRule
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutine_version" //main coroutine rule
+    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutine_version" //main coroutine rule
+    testImplementation "org.mockito:mockito-core:$mockito_version"
+    testImplementation "org.mockito:mockito-inline:$mockito_version"
 }
