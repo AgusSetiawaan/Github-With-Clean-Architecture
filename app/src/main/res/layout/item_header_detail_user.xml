@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:paddingTop="24dp"
+    android:paddingBottom="21dp"
+    android:paddingHorizontal="24dp"
+    >
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/user_avatar"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/fontTitle"
+        android:layout_marginStart="12dp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@id/user_avatar"
+        app:layout_constraintTop_toTopOf="@id/user_avatar"
+        tools:text="Wang Guan" />
+
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/fontRegularBlack"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@id/name"
+        app:layout_constraintTop_toBottomOf="@id/name"
+        tools:text="/@wangguan" />
+
+    <TextView
+        style="@style/fontSubTitle"
+        android:id="@+id/title_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:lineSpacingExtra="5sp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@id/name"
+        app:layout_constraintTop_toBottomOf="@id/username"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="Director of Mihoyo Company, Director of Mobile @mihoyo. DevRel. Engineerin"/>
+    
+    <ImageView
+        android:id="@+id/img_followers"
+        android:src="@drawable/ic_followers"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="@id/name"
+        app:layout_constraintTop_toBottomOf="@id/title_name"/>
+
+    <TextView
+        android:id="@+id/tv_followers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/fontSubTitle"
+        android:layout_marginStart="8dp"
+        app:layout_constraintStart_toEndOf="@id/img_followers"
+        app:layout_constraintTop_toTopOf="@id/img_followers"
+        app:layout_constraintBottom_toBottomOf="@id/img_followers"
+        tools:text="12K Followers" />
+
+    <ImageView
+        android:id="@+id/img_dot"
+        android:src="@drawable/ic_dot"
+        android:layout_width="2dp"
+        android:layout_height="2dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintStart_toEndOf="@id/tv_followers"
+        app:layout_constraintTop_toTopOf="@id/img_followers"
+        app:layout_constraintBottom_toBottomOf="@id/img_followers"/>
+
+    <TextView
+        android:id="@+id/tv_following"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/fontSubTitle"
+        android:layout_marginStart="8dp"
+        app:layout_constraintStart_toEndOf="@id/img_dot"
+        app:layout_constraintTop_toTopOf="@id/img_followers"
+        app:layout_constraintBottom_toBottomOf="@id/img_followers"
+        tools:text="120 Following" />
+
+    <ImageView
+        android:id="@+id/img_location"
+        android:src="@drawable/ic_location"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@id/name"
+        app:layout_constraintTop_toBottomOf="@id/img_followers"/>
+
+    <TextView
+        android:id="@+id/city"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/fontSubTitle"
+        app:layout_constraintStart_toStartOf="@id/tv_followers"
+        app:layout_constraintTop_toTopOf="@id/img_location"
+        app:layout_constraintBottom_toBottomOf="@id/img_location"
+        tools:text="Taipei, Taiwan" />
+
+    <ImageView
+        android:id="@+id/img_mail"
+        android:src="@drawable/ic_mail"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@id/name"
+        app:layout_constraintTop_toBottomOf="@id/img_location"/>
+
+    <TextView
+        android:id="@+id/email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/fontSubTitle"
+        app:layout_constraintStart_toStartOf="@id/tv_followers"
+        app:layout_constraintTop_toTopOf="@id/img_mail"
+        app:layout_constraintBottom_toBottomOf="@id/img_mail"
+        tools:text="wangshi@mihoyo.com" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

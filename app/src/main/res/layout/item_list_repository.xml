@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:paddingVertical="16dp"
+    android:paddingHorizontal="24dp"
+    >
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/user_avatar"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/repo_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        style="@style/fontTitle"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="8dp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@id/user_avatar"
+        app:layout_constraintTop_toTopOf="@id/user_avatar"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="Android-CleanArchitecture" />
+
+    <TextView
+        style="@style/fontSubTitle"
+        android:id="@+id/repo_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/regular_text_color"
+        android:lineSpacingExtra="5sp"
+        app:layout_constraintStart_toStartOf="@id/repo_title"
+        app:layout_constraintTop_toBottomOf="@id/repo_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="This is a sample app that is part of a series of blog posts I have written about how to architect an android application using Uncle Bob's clean architecture approach."/>
+
+    <ImageView
+        android:id="@+id/img_like"
+        android:src="@drawable/ic_star"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="@id/repo_title"
+        app:layout_constraintTop_toBottomOf="@id/repo_description"/>
+
+    <TextView
+        android:id="@+id/like_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/fontRegular"
+        android:layout_marginStart="4dp"
+        app:layout_constraintStart_toEndOf="@id/img_like"
+        app:layout_constraintTop_toTopOf="@id/img_like"
+        app:layout_constraintBottom_toBottomOf="@id/img_like"
+        tools:text="55" />
+
+    <TextView
+        android:id="@+id/updated_at"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/fontRegular"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toEndOf="@id/like_count"
+        app:layout_constraintTop_toTopOf="@id/img_like"
+        app:layout_constraintBottom_toBottomOf="@id/img_like"
+        tools:text="Updated 15 hours ago" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

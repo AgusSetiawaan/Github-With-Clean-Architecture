@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Astro Test</string>
+    <string name="app_name">Github CLean Architecture</string>
     <string name="button_favorite">Button Favorite</string>
     <string name="no_user_found">No User Found</string>
     <string name="search">Search</string>
